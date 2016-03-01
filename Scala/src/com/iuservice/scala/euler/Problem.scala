@@ -13,7 +13,10 @@ abstract class Problem {
   def run(): Unit = {
     println(s"${PROBLEM_HEADER}\n${getProblem()}\n")
     println(s"${EXPLANATION_HEADER}\n ${getExplanation().getOrElse(NO_EXPLANATION)}\n")
+
+    val startTime = System.currentTimeMillis()
     println(s"${RESULT_HEADER}\n ${solveTheProblem()}\n")
+    println(s"Took ${java.text.NumberFormat.getIntegerInstance().format(System.currentTimeMillis() - startTime)}ms.")
   }
 
   protected def getProblem(): String;

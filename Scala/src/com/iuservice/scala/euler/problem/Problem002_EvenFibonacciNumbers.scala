@@ -1,6 +1,7 @@
 package com.iuservice.scala.euler.problem
 
 import com.iuservice.scala.euler.Problem
+import com.iuservice.scala.euler.util.NumberUtil
 
 /**
   * Created by dtc on 2016-03-01.
@@ -22,7 +23,7 @@ class Problem002_EvenFibonacciNumbers extends Problem {
     var term = 0
     var index = 1
     while (term < 4000000) {
-      term = Problem002_EvenFibonacciNumbers.fibonacci(index)
+      term = NumberUtil.fibonacci(index)
       index += 1
       if (term % 2 == 0 && term < 4000000) sum += term
     }
@@ -35,16 +36,5 @@ object Problem002_EvenFibonacciNumbers {
 
   def main(args: Array[String]) {
     new Problem002_EvenFibonacciNumbers().run()
-  }
-
-
-  private def fibonacci(number: Int): Int = {
-    if (number == 1) {
-      1
-    } else if (number == 2) {
-      2
-    } else {
-      fibonacci(number - 1) + fibonacci(number - 2)
-    }
   }
 }
