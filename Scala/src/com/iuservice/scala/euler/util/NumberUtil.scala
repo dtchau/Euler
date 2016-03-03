@@ -18,4 +18,20 @@ object NumberUtil {
       fibonacci(number - 1) + fibonacci(number - 2)
     }
   }
+
+  // Using Sieve of Eratosthenes
+  // Use only for small set of numbers
+  def findPrimesUpTo(number: Int): List[Int] = {
+    val primes = scala.collection.mutable.ListBuffer.empty[Int]
+    if (number > 2) {
+      var numbers = (2 to number).toIndexedSeq
+      while (numbers.length > 0) {
+        val i = numbers(0)
+        primes += i
+        numbers = numbers.filter(_ % i != 0)
+      }
+    }
+
+    primes.toList
+  }
 }
