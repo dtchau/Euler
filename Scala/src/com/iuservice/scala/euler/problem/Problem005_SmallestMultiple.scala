@@ -15,8 +15,28 @@ class Problem005_SmallestMultiple(number: Int) extends Problem {
     """.stripMargin
 
   override protected def solveTheProblem(): Any = {
+    if (number < 2) {
+      return "Why the hell are we doing this again..."
+    }
     val primes = NumberUtil.findPrimesUpTo(number)
-    primes
+    (2 to number).map(getFactors(_, primes).toSeq)
+      .foldLeft(Seq[(Int, Int)]())(_ ++ _)
+      .groupBy(_._1)
+      .mapValues(_.map(_._2).max)
+      .map({ case (k, v) => Math.pow(k, v).toInt })
+      .foldLeft(1)(_ * _)
+  }
+
+  private def getFactors(number: Int, primes: List[Int]): Map[Int, Int] = {
+    val factors = collection.mutable.Map() ++ primes.map((_, 0)).toMap
+    var v = number
+    var factor = primes.find(v % _ == 0)
+    while (factor != None) {
+      factors(factor.get) += 1
+      v /= factor.get
+      factor = primes.find(v % _ == 0)
+    }
+    factors.toMap
   }
 }
 
