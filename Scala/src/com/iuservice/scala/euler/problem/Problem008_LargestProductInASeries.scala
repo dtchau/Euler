@@ -46,9 +46,9 @@ class Problem008_LargestProductInASeries(val numberOfDigits: Int, val seriesOfNu
       }
     })
 
-    var maxValue = 0
+    var maxValue = 0L
     while (arrayBuffer.size == numberOfDigits) {
-      maxValue = Math.max(maxValue, arrayBuffer.foldLeft(1)(_ * _))
+      maxValue = Math.max(maxValue, arrayBuffer.foldLeft(1L)(_ * _))
       arrayBuffer.remove(0)
       if (!numberQueue.isEmpty) {
         arrayBuffer += numberQueue.dequeue()
